@@ -51,9 +51,11 @@ def notfound(e):
 
 def run(arguments={}):
     app.config.update(arguments)
+    print(app.config)
     app.sphinx_app = Sphinx(app.config['SOURCE_DIR'], app.config['CONF_DIR'],
                             app.config['OUT_DIR'], app.config['DOCTREE_DIR'],
                             'html')
+    app.sphinx_app.build(force_all=True)
     app.run(port=app.config['PORT'], host='0.0.0.0')
 
 
