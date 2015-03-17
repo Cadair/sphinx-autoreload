@@ -13,13 +13,15 @@ app.config.from_pyfile('config.py')
 @app.route('/_static/<path:path>')
 @app.route('/sphinx/_static/<path:path>')
 def send_static(path):
-        return send_from_directory(os.path.join(app.config['OUT_DIR'], '_static'), path)
+        _static = os.path.realpath(os.path.join(app.config['OUT_DIR'], '_static'))
+        return send_from_directory(_static, path)
 
 
 @app.route('/_sources/<path:path>')
 @app.route('/sphinx/_sources/<path:path>')
 def send_sources(path):
-        return send_from_directory(os.path.join(app.config['OUT_DIR'], '_sources'), path)
+        _sources = os.path.realpath(os.path.join(app.config['OUT_DIR'], '_sources'))
+        return send_from_directory(_sources, path)
 
 
 @app.route('/')
@@ -51,7 +53,6 @@ def notfound(e):
 
 def run(arguments={}):
     app.config.update(arguments)
-    print(app.config)
     app.sphinx_app = Sphinx(app.config['SOURCE_DIR'], app.config['CONF_DIR'],
                             app.config['OUT_DIR'], app.config['DOCTREE_DIR'],
                             'html')
