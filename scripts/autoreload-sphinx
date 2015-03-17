@@ -1,0 +1,19 @@
+#! python
+"""
+This script will autoreload your sphinx documentation each time you refresh
+your web browser
+
+Usage:
+    autoreload-sphinx <base_dir>
+"""
+
+import docopt
+arguments = docopt.docopt(__doc__)
+
+out_args = {}
+for k,v in arguments.items():
+    out_args[k.strip('<>').upper()] = v
+
+
+from sphinxautoreload import app
+app.run(arguments)
