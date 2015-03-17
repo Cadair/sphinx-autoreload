@@ -4,12 +4,12 @@ This script will autoreload your sphinx documentation each time you refresh
 your web browser
 
 Usage:
-    autoreload-sphinx <base_dir> [--conf_dir=conf_dir] [--out_dir=out_dir] [--doctree_dir=doctree_dir] [--port=port]
+    autoreload-sphinx <source_dir> [--conf_dir=conf_dir] [--out_dir=out_dir] [--doctree_dir=doctree_dir] [--port=port]
 
 Defaults:
-    conf_dir: defaults to base_dir
-    out_dir: defaults to base_dir/_build/html
-    doctree_dir: defaults to base_dir/.doctree
+    conf_dir: defaults to source_dir
+    out_dir: defaults to source_dir/_build/html
+    doctree_dir: defaults to source_dir/.doctree
     port: defaults to 2105
 """
 
@@ -27,7 +27,7 @@ def default_value(adict, akey, avalue):
     if not adict.get(akey):
         adict[akey] = avalue
 
-base_dir = out_args['BASE_DIR']
+base_dir = out_args['SOURCE_DIR']
 default_value(out_args, 'CONF_DIR', base_dir)
 default_value(out_args, 'OUT_DIR', pjoin(base_dir, '_build/html'))
 default_value(out_args, 'DOCTREE_DIR', pjoin(base_dir, '.doctrees'))
